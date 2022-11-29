@@ -1,0 +1,74 @@
+{% extends 'clinica/admin_base.html' %}
+{% load static %}
+{% block content %}
+{%include 'clinica/admin_dashboard_vista.html'%}
+
+<br><br><br>
+<div class="container">
+  <div class="row">
+    <div class="panel panel-primary col-md-5" style="margin-left:2%;">
+      <div class="panel-heading" style="text-align:center;">
+        <h6 class="panel-title">Doctores Recientes</h6>
+      </div>
+      <table class="table table-hover table-striped" id="dev-table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Especialidad</th>
+            <th>Contacto</th>
+            <th>Estado</th>
+
+          </tr>
+        </thead>
+        {% for d in doctores %}
+        <tr>
+          <td> {{d.get_name}}</td>
+          <td>{{d.especialidad}}</td>
+          <td>{{d.telefono}}</td>
+          {%if d.status%}
+          <td> <span class="label label-primary">Permanente</span></td>
+          {% else %}
+          <td> <span class="label label-success">En Espera</span></td>
+          {% endif %}
+
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="panel panel-primary col-md-5" style="margin-left:5%;">
+      <div class="panel-heading" style="text-align:center;">
+        <h6 class="panel-title">Paciente Recientes</h6>
+      </div>
+      <table class="table table-hover table-striped" id="dev-table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Sintomas</th>
+            <th>Contacto</th>
+            <th>Direccion</th>
+            <th>Estado</th>
+
+          </tr>
+        </thead>
+        {% for p in pacientes %}
+        <tr>
+          <td> {{p.get_name}}</td>
+          <td>{{p.sintomas}}</td>
+          <td>{{p.telefono}}</td>
+          <td>{{p.direccion}}</td>
+          {%if p.status%}
+          <td> <span class="label label-primary">Aceptado</span></td>
+          {% else %}
+          <td> <span class="label label-success">En Espera</span></td>
+          {% endif %}
+
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
